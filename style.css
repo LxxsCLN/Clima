@@ -1,0 +1,91 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    justify-content: space-between;
+}
+
+#formdiv{
+    height: auto;
+}
+
+form{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+label {
+    font-weight: bold;
+    padding: 10px 0px;
+}
+  
+input {
+    width: 25vw;
+    padding: 10px 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #3e8e41;
+}
+
+#content{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-self: center;
+    border: 1px solid black;
+    width: 96%;
+}
+
+.z{
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+footer{
+    height: 5vh;
+    width: 100vw;
+    text-align: center;
+    line-height: 5vh;
+    position: absolute;
+    bottom: 0;
+}
+
+@media only screen and (min-width: 768px) {
+    #formdiv{
+        
+    }
+    header{
+        margin: 0px 20vw 5vw 10vw;
+    }
+}
