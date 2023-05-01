@@ -63,14 +63,10 @@ button.addEventListener("click", async (event) => {
   d.innerText = "Humedad: " + dayweather[0].humidity + " %";
   e.innerText = "Viento: " + Math.round(dayweather[0].windSpeedKPH) + " km/h";
   f.innerText = "Dirección del viento: " + dayweather[0].windDir;
-   
-  if (country !== "us"){    
-    await translate(dayweather[0].weather, {from: 'en', to: locales[country].slice(0,2)})
+  await translate(dayweather[0].weather, {from: 'en', to: 'es'})
     .then(response => {
       a.innerText = response.text
-    }
-      );
-  }
+    });
   getSeconds();
   content.append(z,a,b,c,d,e,f);   
   // getWeekDays();
