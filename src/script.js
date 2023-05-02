@@ -88,15 +88,23 @@ button.addEventListener("click", async (event) => {
   seconddiv.append(c,f,d,e)
   content.append(z,a,b,seconddiv);  
   getWeekDays(); 
+  content2.innerHTML = `<div id="pronostico">Pronostico</div>
+  <div id="buttonsdiv">
+      <button>Por hora</button>
+      <button>Por dia</button>
+  </div>
+  <div id="labels">
+      <p>Día</p>
+      <p>Clima</p>
+      <p>Temperatura</p>
+      <p>Prob. de lluvia</p>
+      <p>Humedad</p>
+  </div>`;
   for (let x = 0; x < 7; x++){
     content2.append(createDivs(x))
   }
   
 })
-
-function translateWeather(weather){
-  // translate weather (maybe use switch(weather{case:...etc)
-}
 
 function getWeekDays()
 { 
@@ -144,25 +152,3 @@ function createDivs(day){
   console.log(maindiv)
   return maindiv;
 }
-
-
-/* 0
-: 
-dateTimeISO
-: 
-"2023-05-02T07:00:00-07:00"
-humidity
-: 
-67
-maxTempC
-: 
-31
-minTempC
-: 
-18
-pop
-: 
-0
-weather
-: 
-"Partly Cloudy" */
