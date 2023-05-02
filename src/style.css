@@ -98,18 +98,41 @@ button:hover {
     display: grid;
     width: 100vw;
     grid-template-columns: 1fr;
-    grid-template-rows: 2rem 3rem 2rem;
+    grid-template-rows: 1.8rem 3rem 2.4rem;
     grid-auto-flow: row;
     grid-auto-rows: 50px;
     justify-items: center;
     align-items: center;
-    margin: 5vh 0px;
+    margin: 3vh 0px 5vh 0px;
 }
 
 #pronostico{
     font-size: 1.5rem;
     font-weight: 500;
     font-style: italic;
+}
+
+#buttonsdiv{
+    display: flex;
+    gap: 20px;
+}
+
+.pordia,.porhora{
+    border: none;
+    background-color: rgb(67, 123, 160);
+    border-radius: 0px;
+    width: 5rem;
+    height: 2rem;
+    padding: 0;
+    border: 1px solid white;
+    border-radius: 6px;
+    
+}
+
+.pordia:hover,.porhora:hover{
+    transform: scale(1.05);
+    transition: 200ms;
+    background-color: rgb(67, 123, 160);
 }
 
 #labels{
@@ -122,15 +145,16 @@ button:hover {
 }
 
 #labels>*{
-    border: 1px solid white;
+    border-radius: 3px;
     text-align: center;
-    height: 32px;
-    line-height: 32px;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    box-shadow: 0px 0px 3px 1px #075f7c;
+    background-color: #033b4d;
 }
 
 #labels>*:nth-child(4){
-    text-align: center;
-    line-height: normal;
+    line-height: 1.05rem;
 }
 
 .p2img{
@@ -143,6 +167,8 @@ button:hover {
     margin: 0 2vw;
     grid-template-columns: 22vw 14vw 28vw 19vw 13vw;
     align-items: center;
+    box-shadow: 0px 5px 5px -4px #075f7c;
+    height: 50px;
 }
 
 .hoursdiv{
@@ -150,6 +176,8 @@ button:hover {
     margin: 0 2vw;
     grid-template-columns:22vw 20vw 22vw 19vw 13vw;
     align-items: center;
+    box-shadow: 0px 5px 5px -4px #075f7c;
+    height: 50px;
 }
 
 .hoursdiv>*:first-child{

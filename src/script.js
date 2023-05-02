@@ -242,3 +242,5 @@ async function onLoad(){
 }
 
 onLoad();
+
+// make app functional for PC
