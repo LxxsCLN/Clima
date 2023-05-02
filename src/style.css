@@ -75,13 +75,17 @@ button:hover {
 }
 
 #content{
-    padding: 20px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-self: center;
-    width: 96%;
+    width: 86%;
     text-align: center;
+    border: 2px solid white;
+    border-radius: 16px;
+    box-shadow: 0px 0px 6px 6px #075f7c;
+    background-color: #033b4d;
 }
 
 .seconddiv{
@@ -94,36 +98,62 @@ button:hover {
     display: grid;
     width: 100vw;
     grid-template-columns: 1fr;
+    grid-template-rows: 2rem 3rem 2rem;
     grid-auto-flow: row;
     grid-auto-rows: 50px;
     justify-items: center;
     align-items: center;
-    margin-bottom: 5vh;
+    margin: 5vh 0px;
+}
+
+#pronostico{
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-style: italic;
 }
 
 #labels{
-    width: calc(100vw - 20px);
-    display: flex;
-    flex-direction: row;
-    margin: 0px 10px;
-    align-items: center;
     font-size: .8rem;
-    justify-content: space-between;
+    display: grid;
+    padding: 0 2vw;
+    grid-template-columns: 15vw 16vw 22vw 15vw 19vw;
+    align-items: center;
+    gap: 2vw;
+}
+
+#labels>*{
+    border: 1px solid white;
+    text-align: center;
+    height: 32px;
+    line-height: 32px;
 }
 
 #labels>*:nth-child(4){
     text-align: center;
+    line-height: normal;
 }
 
 .p2img{
-    width: 1rem;
-    height: 1rem;
+    width: 2rem;
+    height: 2rem;
 }
 
 .daysdiv{
     display: grid;
     margin: 0 2vw;
-    grid-template-columns: 22vw 10vw 27vw 20vw 16vw;
+    grid-template-columns: 22vw 14vw 28vw 19vw 13vw;
+    align-items: center;
+}
+
+.hoursdiv{
+    display: grid;
+    margin: 0 2vw;
+    grid-template-columns:22vw 20vw 22vw 19vw 13vw;
+    align-items: center;
+}
+
+.hoursdiv>*:first-child{
+    padding-left: 3vw;
 }
 
 .z{

@@ -1,6 +1,6 @@
 import './style.css';
 import translate, { setCORS } from "google-translate-api-browser";
-setCORS("http://cors-anywhere.herokuapp.com/");
+setCORS("https://cors-anywhere.herokuapp.com/");
 
 function importAll(r) {
   return r.keys().map(r);
@@ -19,7 +19,7 @@ let z;
 let def;
 let country;
 let weekDays = [];
-// const locales = {"us": "en-US", "mx": "es-MX"};
+
 
 async function getHourlyWeather(city){
   let response = await fetch(`https://api.aerisapi.com/conditions/${city},?format=json&to=+24hours&plimit=24&filter=1hr&fields=periods.dateTimeISO,periods.tempC,periods.humidity,periods.windSpeedKPH,periods.windDir,periods.weather,periods.feelslikeC,periods.icon,periods.pop,profile.tz,place.country&client_id=ruiu3ao4xVVkv5j5qSxjU&client_secret=HD17s1cSLlow3SSBplCttuUak9cJ5lZLp41w5vfm`)
@@ -54,7 +54,6 @@ button.addEventListener("click", async (event) => {
   await getHourlyWeather(city);
   await getDailyWeather(city);
   content.innerHTML = "";
-
   def = city.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ') + ", " + country.toUpperCase() + " - ";
   z = document.createElement("p"); 
   z.classList.add("z");  
@@ -69,49 +68,32 @@ button.addEventListener("click", async (event) => {
   let d = document.createElement("p");
   let e = document.createElement("p");
   let f = document.createElement("p");
-
   let icon = new Image();
   icon.src = dayweather[0].icon;
   icon.classList.add("icon");
-
   a.innerText = Math.round(dayweather[0].tempC) + "° C";
   a.append(icon)
   c.innerText = "Sensación térmica: " + Math.round(dayweather[0].feelslikeC) + "° C";
   d.innerText = "Humedad: " + dayweather[0].humidity + "%";
   e.innerText = "Velocidad del viento: " + Math.round(dayweather[0].windSpeedKPH) + " km/hr";
   f.innerText = "Probabilidad de lluvia: " + dayweather[0].pop + "%";
-  await translate(dayweather[0].weather, {from: 'en', to: 'es'})
+
+  /* await translate(dayweather[0].weather, {from: 'en', to: 'es'})
     .then(response => {
+      console.log(response)
       b.innerText = response.text;      
-    });
+  });  */
+  b.innerText = dayweather[0].weather;
+  
   getSeconds();
   seconddiv.append(c,f,d,e)
   content.append(z,a,b,seconddiv);  
-  getWeekDays(); 
-  content2.innerHTML = `<div id="pronostico">Pronostico</div>
-  <div id="buttonsdiv">
-      <button>Por hora</button>
-      <button>Por dia</button>
-  </div>
-  <div id="labels">
-      <p>Día</p>
-      <p>Clima</p>
-      <p>Temperatura</p>
-      <p>Prob. de lluvia</p>
-      <p>Humedad</p>
-  </div>`;
-  for (let x = 0; x < 7; x++){
-    content2.append(createDivs(x))
-  }
-  
+  getWeekDays();  
+  appendHours();
 })
 
-function getWeekDays()
-{ 
-    // let baseDate = new Date(weekweather[0].dateTimeISO.slice(0,10)); // current date
-
-    let baseDate = new Date();
-    
+function getWeekDays(){ 
+    let baseDate = new Date();    
     for(let i = 0; i < 8; i++)
     {       
         weekDays.push(baseDate.toLocaleDateString('es-MX', { weekday: 'long', timeZone: timezone }));
@@ -132,7 +114,7 @@ function getSeconds(){
 
 setInterval(getSeconds, 1000);
 
-function createDivs(day){
+function createDayDivs(day){
   let maindiv = document.createElement("div");
   maindiv.classList.add("daysdiv")
   let p1 = document.createElement("p")
@@ -149,6 +131,114 @@ function createDivs(day){
   p4.innerText = weekweather[day].pop + "%";
   p5.innerText = weekweather[day].humidity + "%";
   maindiv.append(p1,p2,p3,p4,p5)
-  console.log(maindiv)
   return maindiv;
 }
+
+function createHourDivs(hour){
+  let maindiv = document.createElement("div");
+  maindiv.classList.add("hoursdiv")
+  let p1 = document.createElement("p")
+  let p2 = document.createElement("p")
+  let p2img = new Image();
+  p2img.src = dayweather[hour].icon;
+  p2img.classList.add("p2img")
+  let p3 = document.createElement("p")
+  let p4 = document.createElement("p")
+  let p5 = document.createElement("p")
+  p1.innerText = dayweather[hour].dateTimeISO.slice(11,16);
+  p2.append(p2img)
+  p3.innerText = Math.round(dayweather[hour].tempC) + "°C";
+  p4.innerText = dayweather[hour].pop + "%";
+  p5.innerText = dayweather[hour].humidity + "%";
+  maindiv.append(p1,p2,p3,p4,p5)
+  return maindiv;
+}
+
+document.addEventListener("click", e => {                     
+  if (e.target.matches(".pordia")) {
+      e.stopImmediatePropagation();          
+      appendDays();
+}})
+
+document.addEventListener("click", e => {                     
+  if (e.target.matches(".porhora")) {
+      e.stopImmediatePropagation();          
+      appendHours();
+}})
+
+function appendHours(){
+  content2.innerHTML = `<div id="pronostico">Pronóstico</div>
+  <div id="buttonsdiv">
+      <button class="porhora">Por hora</button>
+      <button class="pordia">Por dia</button>
+  </div>
+  <div id="labels">
+      <p>Hora</p>
+      <p>Clima</p>
+      <p>Temperatura</p>
+      <p>Prob. de lluvia</p>
+      <p>Humedad</p>
+  </div>`;
+  for (let x = 1; x < 24; x++){
+    content2.append(createHourDivs(x))
+  }
+}
+
+function appendDays(){  
+  content2.innerHTML = `<div id="pronostico">Pronóstico</div>
+  <div id="buttonsdiv">
+      <button class="porhora">Por hora</button>
+      <button class="pordia">Por dia</button>
+  </div>
+  <div id="labels">
+      <p>Día</p>
+      <p>Clima</p>
+      <p>Temperatura</p>
+      <p>Prob. de lluvia</p>
+      <p>Humedad</p>
+  </div>`;
+  for (let x = 0; x < 7; x++){
+    content2.append(createDayDivs(x))
+  }
+}
+
+async function onLoad(){
+  let city = "Culiacan";
+  await getHourlyWeather(city);
+  await getDailyWeather(city);
+  def = city.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ') + ", " + country.toUpperCase() + " - ";
+  z = document.createElement("p"); 
+  z.classList.add("z");  
+  z.innerHTML = def;  
+  let seconddiv = document.createElement("div")
+  seconddiv.classList.add("seconddiv")
+  let a = document.createElement("p");  
+  a.classList.add("a")
+  let b = document.createElement("p");
+  b.classList.add("b")
+  let c = document.createElement("p");
+  let d = document.createElement("p");
+  let e = document.createElement("p");
+  let f = document.createElement("p");
+  let icon = new Image();
+  icon.src = dayweather[0].icon;
+  icon.classList.add("icon");
+  a.innerText = Math.round(dayweather[0].tempC) + "° C";
+  a.append(icon)
+  c.innerText = "Sensación térmica: " + Math.round(dayweather[0].feelslikeC) + "° C";
+  d.innerText = "Humedad: " + dayweather[0].humidity + "%";
+  e.innerText = "Velocidad del viento: " + Math.round(dayweather[0].windSpeedKPH) + " km/hr";
+  f.innerText = "Probabilidad de lluvia: " + dayweather[0].pop + "%";
+
+  // translate
+
+  b.innerText = dayweather[0].weather;
+  
+  getSeconds();
+  seconddiv.append(c,f,d,e)
+  content.append(z,a,b,seconddiv);  
+  getWeekDays();  
+  appendHours();
+}
+
+onLoad();
