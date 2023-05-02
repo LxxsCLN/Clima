@@ -78,12 +78,11 @@ button.addEventListener("click", async (event) => {
   e.innerText = "Velocidad del viento: " + Math.round(dayweather[0].windSpeedKPH) + " km/hr";
   f.innerText = "Probabilidad de lluvia: " + dayweather[0].pop + "%";
 
-  /* await translate(dayweather[0].weather, {from: 'en', to: 'es'})
+  await translate(dayweather[0].weather, {from: 'en', to: 'es'})
     .then(response => {
       console.log(response)
       b.innerText = response.text;      
-  });  */
-  b.innerText = dayweather[0].weather;
+  });
   
   getSeconds();
   seconddiv.append(c,f,d,e)
@@ -230,9 +229,11 @@ async function onLoad(){
   e.innerText = "Velocidad del viento: " + Math.round(dayweather[0].windSpeedKPH) + " km/hr";
   f.innerText = "Probabilidad de lluvia: " + dayweather[0].pop + "%";
 
-  // translate
-
-  b.innerText = dayweather[0].weather;
+  await translate(dayweather[0].weather, {from: 'en', to: 'es'})
+    .then(response => {
+      console.log(response)
+      b.innerText = response.text;      
+  });
   
   getSeconds();
   seconddiv.append(c,f,d,e)
