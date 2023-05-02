@@ -22,7 +22,7 @@ let weekDays = [];
 // const locales = {"us": "en-US", "mx": "es-MX"};
 
 async function getHourlyWeather(city){
-  let response = await fetch(`https://api.aerisapi.com/conditions/${city},?format=json&to=+24hours&plimit=24&filter=1hr&fields=periods.dateTimeISO,periods.tempC,periods.humidity,periods.windSpeedKPH,periods.windDir,periods.weather,periods.feelslikeC,periods.icon,periods.pop,profile.tz,place.country&client_id=ruiu3ao4xVVkv5j5qSxjU&client_secret=HD17s1cSLlow3SSBplCttuUak9cJ5lZLp41w5vfm`)
+  let response = await fetch(`https://api.aerisapi.com/conditions/${city},?format=json&to=+24hours&plimit=24&filter=1hr&fields=periods.dateTimeISO,periods.tempC,periods.humidity,periods.windSpeedKPH,periods.windDir,periods.weather,periods.feelslikeC,periods.icon,periods.pop,profile.tz,place.country&client_id=ruiu3ao4xVVkv5j5qSxjU&client_secret=HD17s1cSLlow3SSBplCttuUak9cJ5lZLp41w5vfm`, {mode: 'cors'})
   let weather = await response.json();  
   if (weather.error) {
     console.log(weather.error.description);
@@ -35,7 +35,7 @@ async function getHourlyWeather(city){
 }
 
 async function getDailyWeather(city){    
-  let response = await fetch(`https://api.aerisapi.com/forecasts/${city},?format=json&filter=day&limit=8&fields=periods.maxTempC,periods.minTempC,periods.humidity,periods.weather,periods.icon,periods.pop,periods.dateTimeISO&client_id=ruiu3ao4xVVkv5j5qSxjU&client_secret=HD17s1cSLlow3SSBplCttuUak9cJ5lZLp41w5vfm`)
+  let response = await fetch(`https://api.aerisapi.com/forecasts/${city},?format=json&filter=day&limit=8&fields=periods.maxTempC,periods.minTempC,periods.humidity,periods.weather,periods.icon,periods.pop,periods.dateTimeISO&client_id=ruiu3ao4xVVkv5j5qSxjU&client_secret=HD17s1cSLlow3SSBplCttuUak9cJ5lZLp41w5vfm`, {mode: 'cors'})
   let weather = await response.json();
   if (weather.error) {
     console.log(weather.error.description);
