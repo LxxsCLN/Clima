@@ -1,6 +1,6 @@
 import './style.css';
 import translate, { setCORS } from "google-translate-api-browser";
-setCORS("https://cors-anywhere.herokuapp.com/");
+setCORS("http://cors-anywhere.herokuapp.com/");
 
 function importAll(r) {
   return r.keys().map(r);
@@ -77,11 +77,13 @@ button.addEventListener("click", async (event) => {
   e.innerText = "Velocidad del viento: " + Math.round(dayweather[0].windSpeedKPH) + " km/hr";
   f.innerText = "Probabilidad de lluvia: " + dayweather[0].pop + "%";
 
-  await translate(dayweather[0].weather, {from: 'en', to: 'es'})
+  /* await translate(dayweather[0].weather, {from: 'en', to: 'es'})
     .then(response => {
       console.log(response)
       b.innerText = response.text;      
-  });
+  }); */
+
+  b.innerText = dayweather[0].weather;
   
   getSeconds();
   seconddiv.append(c,f,d,e)
@@ -228,11 +230,13 @@ async function onLoad(){
   e.innerText = "Velocidad del viento: " + Math.round(dayweather[0].windSpeedKPH) + " km/hr";
   f.innerText = "Probabilidad de lluvia: " + dayweather[0].pop + "%";
 
-  await translate(dayweather[0].weather, {from: 'en', to: 'es'})
+  /* await translate(dayweather[0].weather, {from: 'en', to: 'es'})
     .then(response => {
       console.log(response)
       b.innerText = response.text;      
-  });
+  }); */
+
+  b.innerText = dayweather[0].weather;
   
   getSeconds();
   seconddiv.append(c,f,d,e)

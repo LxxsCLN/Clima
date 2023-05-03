@@ -12,7 +12,10 @@ body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #004458;
+    background-color: #004458; 
+    /* background-image: url('background.jpg');
+    object-fit: fill;
+    background-attachment: fixed; */
 }
 
 header{
