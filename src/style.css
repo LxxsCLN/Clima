@@ -16,6 +16,7 @@ body{
     /* background-image: url('background.jpg');
     object-fit: fill;
     background-attachment: fixed; */
+    max-width: 95vw;
 }
 
 header{
@@ -99,7 +100,7 @@ button:hover {
 
 #content2{
     display: grid;
-    width: 100vw;
+    width: 97vw;
     grid-template-columns: 1fr;
     grid-template-rows: 1.8rem 3rem 2.4rem;
     grid-auto-flow: row;
@@ -142,7 +143,7 @@ button:hover {
     font-size: .8rem;
     display: grid;
     padding: 0 2vw;
-    grid-template-columns: 15vw 16vw 22vw 15vw 19vw;
+    grid-template-columns: 15vw 16vw 22vw 15vw 20vw;
     align-items: center;
     gap: 2vw;
 }
@@ -221,11 +222,48 @@ footer{
     background-color: #012631;
 }
 
-@media only screen and (min-width: 768px) {
+@media (width > 768px) {
     #formdiv{
         
     }
     header{
         margin: 0px 20vw 5vw 10vw;
+    }
+    #content{
+        width: 40%;
+    }
+    
+    
+    .hoursdiv{
+        display: grid;
+        margin: 0 2vw;
+        grid-template-columns:23vw 20vw 22vw 19vw 12vw;
+        align-items: center;
+        box-shadow: 0px 5px 5px -4px #075f7c;
+        height: 50px;
+    }
+
+    .hoursdiv>*:first-child{
+        padding-left: 6vw;
+    }
+    .daysdiv>*:first-child{
+        padding-left: 4vw;
+    }
+    .daysdiv{
+        display: grid;
+        margin: 0 2vw;
+        grid-template-columns: 23vw 18vw 23vw 22vw 10vw;
+        align-items: center;
+        box-shadow: 0px 5px 5px -4px #075f7c;
+        height: 50px;
+    }
+    #labels>*:nth-child(4){
+        line-height: 2.2rem;
+    }
+    .daysdiv>*:nth-child(4){
+
+    }
+    header{
+        margin-bottom: 0vh;
     }
 }
