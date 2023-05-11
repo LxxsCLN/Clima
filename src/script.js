@@ -1,6 +1,7 @@
 import './style.css';
 import translate, { setCORS } from "google-translate-api-browser";
 setCORS("http://cors-anywhere.herokuapp.com/");
+// https://justcors.com/
 
 function importAll(r) {
   return r.keys().map(r);
@@ -32,7 +33,6 @@ async function getHourlyWeather(city){
   country = weather.response[0].place.country;
   timezone = weather.response[0].profile.tz;
   dayweather = weather.response[0].periods;
-  console.log(dayweather)
 }
 
 async function getDailyWeather(city){    
@@ -44,7 +44,6 @@ async function getDailyWeather(city){
   }
   weekweather = weather.response[0].periods;
   weekweather = weekweather.slice(1,8)
-  console.log(weekweather);
 }
 
 button.addEventListener("click", async (event) => {
@@ -84,7 +83,7 @@ button.addEventListener("click", async (event) => {
     .then(response => {
       console.log(response)
       b.innerText = response.text;      
-  }); */
+  });  */
 
   b.innerText = dayweather[0].weather;
   
@@ -111,7 +110,7 @@ function getSeconds(){
   if (!z) return
   let date = new Date();
   let newdate = date.toLocaleString('en', { timeZone: timezone });
-  newdate = newdate.slice(10,21)
+  newdate = newdate.slice(10)
   z.innerHTML = def + newdate;
 }
 
@@ -241,7 +240,7 @@ async function onLoad(){
     .then(response => {
       console.log(response)
       b.innerText = response.text;      
-  }); */
+  });  */
 
   b.innerText = dayweather[0].weather;
   
