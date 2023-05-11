@@ -20,6 +20,8 @@ let def;
 let country;
 let weekDays = [];
 
+
+
 async function getHourlyWeather(city){
   let response = await fetch(`https://api.aerisapi.com/conditions/${city},?format=json&to=+24hours&plimit=24&filter=1hr&fields=periods.dateTimeISO,periods.tempC,periods.humidity,periods.windSpeedKPH,periods.windDir,periods.weather,periods.feelslikeC,periods.icon,periods.pop,profile.tz,place.country&client_id=ruiu3ao4xVVkv5j5qSxjU&client_secret=HD17s1cSLlow3SSBplCttuUak9cJ5lZLp41w5vfm`)
   let weather = await response.json();  
@@ -49,6 +51,7 @@ button.addEventListener("click", async (event) => {
   event.preventDefault();
   if (!input.value) return;
   let city = input.value;
+  localStorage.setItem("currentcity", city);
   input.value = "";
   await getHourlyWeather(city);
   await getDailyWeather(city);
@@ -204,6 +207,10 @@ function appendDays(){
 
 async function onLoad(){
   let city = "Culiacan";
+  if (localStorage.getItem("currentcity")){
+    city = localStorage.getItem("currentcity");
+  }    
+  localStorage.setItem("currentcity", city);
   await getHourlyWeather(city);
   await getDailyWeather(city);
   def = city.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ') + ", " + country.toUpperCase() + " - ";
